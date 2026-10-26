@@ -1,5 +1,5 @@
-# File model_3.yaml has automatically been generated on 2026-10-22 16:11:45.292293
-# biogeme 3.3.5 [2026-10-22]
+# File model_3.yaml has automatically been generated on 2026-10-26 10:55:34.443057
+# biogeme 3.3.5 [2026-10-26]
 
 analytical_hessian_mode: full
 beta_names:
@@ -274,7 +274,7 @@ optimization_messages:
   Number of gradient evaluations: 13
   Number of hessian evaluations: 6
   Number of iterations: '6'
-  Optimization time: '0.833521'
+  Optimization time: '0.859741'
   Proportion of Hessian calculation: 6/6 = 100.0%
   Relative gradient: 2.319193554461448e-06
 sample_size: 5000
