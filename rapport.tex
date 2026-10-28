@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english]{babel} 
+\usepackage{amsmath}
+
+\title{Analysis of Mode Choice Behavior in the London Metropolitan Area}
+\author{Baptiste Bert, Chloe Ruiz, Adel Said, Lisa Van der Puijl}
+\date{October 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+This report presents the development of a discrete choice model to analyze the behavior of transportation mode choice in the London metropolitan area, using the London Passenger Mode Choice (LPMC) dataset. The alternatives available are walking (1), cycling (2), public transport (3), and driving (4).
+
+%model 0 
+\section{Model 0: Base Model}
+
+\subsection{Model Specification}
+The base model includes Alternative Specific Constants (ASCs) for cycling, public transport, and driving, setting walking as the reference alternative. It also includes generic parameters for travel time ($\beta_{time}$) and travel cost ($\beta_{cost}$). The utility functions are defined as :
+
+\begin{align*}
+V_{walk} &= \beta_{time} \cdot dur\_walking \\
+V_{cycle} &= ASC_{cycle} + \beta_{time} \cdot dur\_cycling \\
+V_{pt} &= ASC_{pt} + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time} \cdot dur\_pt\_total \\
+V_{car} &= ASC_{car} + \beta_{cost} \cdot cost\_car\_euro + \beta_{time} \cdot dur\_driving
+\end{align*}
+\subsection{Estimation Results}
+
+All five estimated parameters have a p-value of 0.0. This means that the Alternative Specific Constants (ASCs) for bike, public transport, and car, as well as the generic parameters for time and cost, are all highly significant. 
+
+$\beta_{time} = -5.82$; the sign is negative, which aligns with behavioral expectations : an increase in travel time makes the alternative less attractive. 
+
+$\beta_{cost} = -0.16$; which is also negative and consistent : a higher travel costs decrease the utility of a transport mode. 
+
+About ASC :  
+
+Walking was chosen as the reference alternative ($ASC_{walk} = 0$)  
+
+
+- The estimated ASCs for other modes are all negative ($ASC_{pt} = -0.67$, $ASC_{car} = -1.44$ and 
+$ASC_{bike} = -4.01$) : if time and cost were exactly the same acress all modes, walking would be the preferred mode on average
+
+- The estimation provides 5 parameters. The initial log-likelihood is -6,931.472, and the final log-likelihood is -4,547.355. This results in a $\rho^2$ (Rho-square) of 0.344, demonstrating an adequate level of explanatory power for an initial model. 
+
+\end{document}
