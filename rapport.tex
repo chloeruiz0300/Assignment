@@ -46,4 +46,20 @@ $ASC_{bike} = -4.01$) : if time and cost were exactly the same acress all modes,
 
 - The estimation provides 5 parameters. The initial log-likelihood is -6,931.472, and the final log-likelihood is -4,547.355. This results in a $\rho^2$ (Rho-square) of 0.344, demonstrating an adequate level of explanatory power for an initial model. 
 
+% Model 1 
+
+\section{Model 1 : Alternative-Specific Parameters}
+
+\subsection{Model Specification}
+Using Model 0 as the base model, in this section, we introduce alternative specific parameters for travel time (with $\beta_{time\_walk}$, $\beta_{time\_cycle}$, $\beta_{time\_pt}$ and $\beta_{time\_car}$). The generic $\beta_{cost}$ is still the same.
+
+\begin{align}
+    V_{walk} &= \beta_{time\_walk} \cdot dur\_walking \\
+    V_{cycle} &= ASC_{cycle} + \beta_{time\_cycle} \cdot dur\_cycling \\
+    V_{pt} &= ASC_{pt} + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time\_pt} \cdot dur\_pt\_total \\
+    V_{car} &= ASC_{car} + \beta_{cost} \cdot cost\_car\_euro + \beta_{time\_car} \cdot dur\_driving
+\end{align}
+
+
+
 \end{document}
