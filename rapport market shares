@@ -1,0 +1,169 @@
+\documentclass[11pt,a4paper]{article}
+% Packages
+\usepackage[latin1]{inputenc}
+%\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{verbatim}
+
+%resume enumerate
+\usepackage{enumitem}
+
+%% Format de la page
+\pagestyle{plain}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\textheight}{225mm}
+\setlength{\textwidth}{160mm}
+\newlength{\thickness} \setlength{\thickness}{0.2mm}
+\setlength{\parindent}{0cm}
+
+\usepackage{caption}
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}
+
+\begin{document}
+
+\noindent \parbox[b]{9.4cm}{
+  \small
+{\bf Choice Modelling in Transportation 2026/2027 } \\
+\bigskip
+{\bf Dr. Silvia Varotto}
+
+% the LOGO must be included in the TEMPLATE
+} \hfill \includegraphics[width=5cm]{LogoENTPE.jpg}
+
+\noindent\hrulefill\\
+\centerline{\large \bf Analysis of mode choice behaviour in the London metropolitan area}\vspace{2ex}
+\centerline{\bf Course assignment - 16 September 2026}
+
+\section*{Group I}
+Baptiste Bert, Chloe Ruiz, Adel Said, Lisa Van der Puijl
+
+
+
+\paragraph{Market shares [2.5 points]} Assume that stratified random sampling was used to produce your sample. The sample was divided into strata (i.e., groups) and simple random sampling was used to sample observations in each stratum. We consider the following strata:
+
+\begin{itemize}
+	\item \textbf{S1:} females aged 40 years or younger;
+	\item \textbf{S2:} females aged 41 years or older;
+	\item \textbf{S3:} males aged 40 years or younger;
+	\item \textbf{S4:} males aged 41 years or older.
+\end{itemize}
+
+Table~\ref{tab:table1} gives the size of each category in the full population.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c|cc}
+		       & $\text{Age} \leq 40$ &  $\text{Age} > 40$ \\
+		\hline
+		  Male &            2'676'249 &           1'633'263\\
+		Female &            2'599'058 &           1'765'143
+	\end{tabular}
+	\captionof{table}{London population estimates in 2015 (Source: ONS)\label{tab:table1}}
+\end{table}
+
+\begin{enumerate}
+	\item Report the size and weight of each stratum in your sample \textbf{[1~point]}.
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+All market shares are computed with our preferred model, Model 3 ($\text{Model}_\text{pref}$), with the logarithm of travel times, the interaction of age with the ASCs and the traffic variability for car. The total population is $N = 2'599'058 + 1'765'143 + 2'676'249 + 1'633'263 = 8'673'713$ and the sample size is $S = 5'000$. Each observation $n$ belonging to stratum $g$ receives the weight:
+\[
+\omega_g = \frac{N_g / N}{S_g / S}
+\]
+where $N_g$ is the size of stratum $g$ in the population and $S_g$ its size in the sample. A weight greater than 1 means that the stratum is under-represented in the sample, and a weight lower than 1 means that it is over-represented. As a check, the sum of the weights over the whole sample is equal to $\sum_{n} \omega_{g(n)} = 5'000 = S$.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|cccc|c}
+		Stratum & $N_g$ & $N_g/N$ & $S_g$ & $S_g/S$ & Weight $\omega_g$ \\
+		\hline
+		S1: Female, $\text{Age} \leq 40$ & 2'599'058 & 0.2996 & 1'415 & 0.2830 & 1.0588 \\
+		S2: Female, $\text{Age} > 40$    & 1'765'143 & 0.2035 & 1'195 & 0.2390 & 0.8515 \\
+		S3: Male, $\text{Age} \leq 40$   & 2'676'249 & 0.3085 & 1'251 & 0.2502 & 1.2332 \\
+		S4: Male, $\text{Age} > 40$      & 1'633'263 & 0.1883 & 1'139 & 0.2278 & 0.8266 \\
+		\hline
+		Total & 8'673'713 & 1 & 5'000 & 1 & -- \\
+	\end{tabular}
+	\captionof{table}{Size and weight of each stratum in the sample\label{tab:weights}}
+\end{table}
+
+The young individuals (S1 and S3), and especially the young males (S3, $\omega = 1.23$), are under-represented in our sample, while the individuals aged 41 or older (S2 and S4) are over-represented.
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
+
+\begin{enumerate}[resume]
+	\item Using $\text{Model}_\text{pref}$ and the weights of your strata, compute the predicted market share of each mode and their confidence intervals. Do the obtained results match your expectations? \textbf{[1~point]}
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+Using $\text{Model}_\text{pref}$, we first simulate for each individual $n$ the probability $P_n(i)$ of choosing each alternative $i$. The predicted market share of alternative $i$ is then the weighted mean of these individual probabilities:
+\[
+W(i) = \frac{1}{S} \sum_{n=1}^{S} \omega_{g(n)} \cdot P_n(i)
+\]
+To obtain the confidence intervals, we re-estimate $\text{Model}_\text{pref}$ with bootstrapping (100 draws). This gives a sample of 100 values of the parameters, which we use to simulate the probabilities and compute the 90\% confidence interval of each market share.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|cc}
+		Mode & Predicted market share & 90\% confidence interval \\
+		\hline
+		Walking          & 18.7\% & [17.5\% ; 19.8\%] \\
+		Cycling          & 2.8\%  & [2.3\% ; 3.3\%] \\
+		Public transport & 35.7\% & [33.9\% ; 37.6\%] \\
+		Car              & 42.8\% & [40.7\% ; 44.9\%] \\
+	\end{tabular}
+	\captionof{table}{Weighted market shares predicted by $\text{Model}_\text{pref}$\label{tab:ms}}
+\end{table}
+
+The results match our expectations:
+\begin{itemize}
+	\item \textbf{Car} is the most chosen mode (42.8\%), followed by \textbf{public transport} (35.7\%). This is consistent with the London metropolitan area, which has a very dense public transport network, but where a large part of the trips are made in the outer areas where the car stays very competitive.
+	\item \textbf{Walking} has a significant share (18.7\%). It is the preferred mode for short trips, which is consistent with the strong negative effect of the logarithm of walking time ($\beta_{time\_walk} = -4.19$): walking is very attractive for short trips but quickly loses its utility when the trip gets longer.
+	\item \textbf{Cycling} has a very low share (2.8\%), which is consistent with the very negative $ASC_{cycle}$ ($-2.58$) and with the known low cycling share in London.
+\end{itemize}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
+
+\begin{enumerate}[resume]
+	\item Compare the market shares predicted by $\text{Model}_\text{pref}$ with the weighted market shares computed using the actual choices. \textbf{[0.5~point]}
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+The weighted market shares of the actual choices are computed with the same weights, by replacing the predicted probabilities with the observed choices:
+\[
+W_{obs}(i) = \frac{1}{S} \sum_{n=1}^{S} \omega_{g(n)} \cdot y_{in}
+\qquad \text{with } y_{in} = 1 \text{ if individual } n \text{ chose } i, \text{ and } 0 \text{ otherwise.}
+\]
+
+% ---------------------------------------------------------------------------
+% TO DO: the weighted actual shares are NOT yet computed in the notebook.
+% Run the following lines and replace the red values below:
+%
+%   for mode, name in {1:'walk', 2:'cycle', 3:'pt', 4:'drive'}.items():
+%       share = (df['Weight'] * (df['travel_mode'] == mode)).mean()
+%       print(f'Actual weighted share for {name}: {100*share:.1f}%')
+% ---------------------------------------------------------------------------
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|ccc}
+		Mode & Predicted ($\text{Model}_\text{pref}$) & 90\% CI & Actual (weighted) \\
+		\hline
+		Walking          & 18.7\% & [17.5\% ; 19.8\%] & \todo{XX.X\%} \\
+		Cycling          & 2.8\%  & [2.3\% ; 3.3\%]   & \todo{XX.X\%} \\
+		Public transport & 35.7\% & [33.9\% ; 37.6\%] & \todo{XX.X\%} \\
+		Car              & 42.8\% & [40.7\% ; 44.9\%] & \todo{XX.X\%} \\
+	\end{tabular}
+	\captionof{table}{Predicted versus actual weighted market shares\label{tab:actual}}
+\end{table}
+
+
+
+
+\end{document}
