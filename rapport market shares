@@ -141,26 +141,23 @@ W_{obs}(i) = \frac{1}{S} \sum_{n=1}^{S} \omega_{g(n)} \cdot y_{in}
 \qquad \text{with } y_{in} = 1 \text{ if individual } n \text{ chose } i, \text{ and } 0 \text{ otherwise.}
 \]
 
-% ---------------------------------------------------------------------------
-% TO DO: the weighted actual shares are NOT yet computed in the notebook.
-% Run the following lines and replace the red values below:
-%
-%   for mode, name in {1:'walk', 2:'cycle', 3:'pt', 4:'drive'}.items():
-%       share = (df['Weight'] * (df['travel_mode'] == mode)).mean()
-%       print(f'Actual weighted share for {name}: {100*share:.1f}%')
-% ---------------------------------------------------------------------------
+
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{l|ccc}
 		Mode & Predicted ($\text{Model}_\text{pref}$) & 90\% CI & Actual (weighted) \\
 		\hline
-		Walking          & 18.7\% & [17.5\% ; 19.8\%] & \todo{XX.X\%} \\
-		Cycling          & 2.8\%  & [2.3\% ; 3.3\%]   & \todo{XX.X\%} \\
-		Public transport & 35.7\% & [33.9\% ; 37.6\%] & \todo{XX.X\%} \\
-		Car              & 42.8\% & [40.7\% ; 44.9\%] & \todo{XX.X\%} \\
+		Walking          & 18.7\% & [17.5\% ; 19.8\%] & 18.9\% \\
+		Cycling          & 2.8\%  & [2.3\% ; 3.3\%]   & 3\% \\
+		Public transport & 35.7\% & [33.9\% ; 37.6\%] & 35.7\% \\
+		Car              & 42.8\% & [40.7\% ; 44.9\%] & 42.5\% \\
 	\end{tabular}
 	\captionof{table}{Predicted versus actual weighted market shares\label{tab:actual}}
+{\itshape\raggedright
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+The values of our actual choices are close to the values predicted by our model ($\text{Model}_\text{pref}$), and for each mode, the actual values lie within the confidence interval. We can therefore validate our predicted model ($\text{Model}_\text{pref}$) as a good model.\par
+}
 \end{table}
 
 
