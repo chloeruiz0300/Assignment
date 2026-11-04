@@ -1,4 +1,4 @@
-# File model_0.yaml has automatically been generated on 2026-11-04 09:27:23.809131
+# File model_0.yaml has automatically been generated on 2026-11-04 11:47:05.972847
 # biogeme 3.3.5 [2026-11-04]
 
 analytical_hessian_mode: full
@@ -15,51 +15,51 @@ beta_values:
 - -0.15651291905924639
 - -1.4447649821406623
 bhhh:
-- - 86.64690898907453
-  - -9.123788264788509
-  - 150.82997112113878
-  - -5.214221078322072
-  - -238.12533058210744
-- - -9.123788264788509
-  - 139.29587277880978
-  - -54.058962640980866
-  - -179.46962296573537
+- - 86.64690898907452
+  - -9.123788264788507
+  - 150.8299711211388
+  - -5.214221078322078
+  - -238.1253305821075
+- - -9.123788264788507
+  - 139.29587277880975
+  - -54.05896264098088
+  - -179.4696229657354
   - -57.400408759499285
-- - 150.82997112113878
-  - -54.058962640980866
-  - 932.1454855133165
-  - 512.3243529018641
+- - 150.8299711211388
+  - -54.05896264098088
+  - 932.1454855133164
+  - 512.3243529018645
   - -710.36335962205
-- - -5.214221078322072
-  - -179.46962296573537
-  - 512.3243529018641
+- - -5.214221078322078
+  - -179.4696229657354
+  - 512.3243529018645
   - 7062.500369517684
-  - 10.427624897926052
-- - -238.12533058210744
-  - -57.400408759499285
+  - 10.427624897926076
+- - -238.1253305821075
+  - -57.40040875949927
   - -710.36335962205
-  - 10.427624897926052
-  - 1059.4329309565778
+  - 10.427624897926094
+  - 1059.432930956578
 bootstrap: []
 bootstrap_complete: true
 bootstrap_time: null
 convergence: true
 data_name: london
 draws_processing_time: '0.0'
-final_log_likelihood: -4547.354714357649
+final_log_likelihood: -4547.35471435765
 gradient:
-- -0.0013936335951454382
-- -4.189337282944905e-05
+- -0.0013936335951472145
+- -4.1893372831225406e-05
 - 0.00031517933079783234
-- 0.001961830749237947
-- 0.0012691064152168252
+- 0.0019618307493303178
+- 0.0012691064152239306
 gradient_bhhh_complete: true
 hessian:
 - - -80.7776464923079
   - 7.41380134966834
-  - -79.0869602194418
-  - 87.09997688204685
-  - 197.06358494130433
+  - -79.08696021944178
+  - 87.09997688204682
+  - 197.0635849413043
 - - 7.413801349668342
   - -138.24265068119132
   - 50.05052927195966
@@ -71,19 +71,19 @@ hessian:
   - -451.4083570258863
   - 604.6562617050224
 - - 87.09997688204686
-  - 207.0320261305085
-  - -451.4083570258863
+  - 207.03202613050848
+  - -451.4083570258865
   - -7261.4505927981845
-  - -212.84537626624024
+  - -212.84537626624
 - - 197.0635849413043
   - 65.37802825790561
   - 604.6562617050224
-  - -212.8453762662401
-  - -943.4678292018218
+  - -212.84537626624
+  - -943.4678292018219
 hessian_complete: true
 hessian_observation_batch_size: 100
 hessian_parameter_block_size: 4
-initial_log_likelihood: -4547.354714357649
+initial_log_likelihood: -6931.471805599453
 lower_bounds:
 - null
 - null
@@ -99,13 +99,14 @@ number_of_observations: 5000
 optimization_complete: true
 optimization_messages:
   Algorithm: Newton with trust region for simple bound constraints
-  Cause of termination: Relative gradient = 1.8e-06 <= 6.1e-06
-  Number of function evaluations: 1
-  Number of gradient evaluations: 1
-  Number of hessian evaluations: 0
-  Number of iterations: '0'
-  Optimization time: '0.096944'
-  Relative gradient: 1.783288495608197e-06
+  Cause of termination: Relative gradient = 1.2e-06 <= 6.1e-06
+  Number of function evaluations: 19
+  Number of gradient evaluations: 13
+  Number of hessian evaluations: 6
+  Number of iterations: '6'
+  Optimization time: '0.71846'
+  Proportion of Hessian calculation: 6/6 = 100.0%
+  Relative gradient: 1.1699168048520632e-06
 sample_size: 5000
 types_of_draws: null
 upper_bounds:
