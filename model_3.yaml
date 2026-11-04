@@ -1,4 +1,4 @@
-# File model_3.yaml has automatically been generated on 2026-11-04 10:05:11.501067
+# File model_3.yaml has automatically been generated on 2026-11-04 11:39:59.970893
 # biogeme 3.3.5 [2026-11-04]
 
 analytical_hessian_mode: full
@@ -129,7 +129,7 @@ bootstrap: []
 bootstrap_complete: true
 bootstrap_time: null
 convergence: true
-data_name: netherlands
+data_name: london
 draws_processing_time: '0.0'
 final_log_likelihood: -4121.260204193128
 gradient:
@@ -274,7 +274,7 @@ optimization_messages:
   Number of gradient evaluations: 13
   Number of hessian evaluations: 6
   Number of iterations: '6'
-  Optimization time: '0.808505'
+  Optimization time: '0.900744'
   Proportion of Hessian calculation: 6/6 = 100.0%
   Relative gradient: 2.303861101295059e-06
 sample_size: 5000
