@@ -1,19 +1,50 @@
-\documentclass{article}
-\usepackage{geometry}
-\geometry{margin=2.5cm}
-\usepackage{graphicx} % Required for inserting images
-\usepackage[english]{babel} 
+\documentclass[11pt,a4paper]{article}
+% Packages
+\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
 \usepackage{amsmath}
-\title{Analysis of Mode Choice Behavior in the London Metropolitan Area}
-\author{Baptiste Bert, Chloe Ruiz, Adel Said, Lisa Van der Puijl}
-\date{October 2026}
+\usepackage{hyperref}
+\usepackage{verbatim}
+
+%resume enumerate
+\usepackage{enumitem}
+
+%% Format de la page
+\pagestyle{plain}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\textheight}{225mm}
+\setlength{\textwidth}{160mm}
+\newlength{\thickness} \setlength{\thickness}{0.2mm}
+\setlength{\parindent}{0cm}
+
+\usepackage{caption}
+
 \begin{document}
-\maketitle
-\section*{Introduction}
-This report presents the development of a discrete choice model to analyze the behavior of transportation mode choice in the London metropolitan area, using the London Passenger Mode Choice (LPMC) dataset. The alternatives available are walking (1), cycling (2), public transport (3), and driving (4).
-%model 0 
-\section{Model 0: Base Model}
-\subsection{Model Specification}
+
+\noindent \parbox[b]{9.4cm}{
+  \small
+{\bf Choice Modelling in Transportation 2026/2027 } \\
+\bigskip
+{\bf Dr. Silvia Varotto}
+
+% the LOGO must be included in the TEMPLATE
+} \hfill \includegraphics[width=5cm]{LogoENTPE.jpg}
+
+\noindent\hrulefill\\
+\centerline{\large \bf Analysis of mode choice behaviour in the London metropolitan area}\vspace{2ex}
+\centerline{\bf Course assignment - 16 September 2026}
+
+%Include here your group number and the names of the members of the group
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % NO GROUPS THIS YEAR
+\section{Group I}
+BERT Baptiste, RUIZ Chloe, SAID Adel, VAN DER PUIJL Lisa% Please replace XX by your group number.
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\paragraph{Model 0 [1.5 points]} Develop a model specification that includes alternative specific constant, cost and travel time for each alternative. Cost and travel time are associated with generic parameters. Present both the specification (i.e., the utility functions) and the estimation results (parameter values, t-tests or p-values, null and final log-likelihoods). \textbf{[1~point]}\\
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\paragraph{Model Specification}
 The base model includes Alternative Specific Constants (ASCs) for cycling, public transport, and driving, setting walking as the reference alternative. It also includes generic parameters for travel time ($\beta_{time}$) and travel cost ($\beta_{cost}$). The utility functions are defined as :
 \begin{align*}
 V_{walk} &= \beta_{time} \cdot dur\_walking \\
@@ -21,17 +52,38 @@ V_{cycle} &= ASC_{cycle} + \beta_{time} \cdot dur\_cycling \\
 V_{pt} &= ASC_{pt} + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time} \cdot dur\_pt\_total \\
 V_{car} &= ASC_{car} + \beta_{cost} \cdot cost\_car\_euro + \beta_{time} \cdot dur\_driving
 \end{align*}
-\subsection{Estimation Results}
+\textit{%
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+}\\
+
+\begin{enumerate}
+	\item Comment on the estimation results (statistical significance and sign of all parameters). \textbf{[0.5~point]}
+\end{enumerate}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\paragraph{Estimation Results}
+\begin{description}
 All five estimated parameters have a p-value of 0.0. This means that the Alternative Specific Constants (ASCs) for bike, public transport, and car, as well as the generic parameters for time and cost, are all highly significant. 
-$\beta_{time} = -5.82$; the sign is negative, which aligns with behavioral expectations : an increase in travel time makes the alternative less attractive. 
-$\beta_{cost} = -0.16$; which is also negative and consistent : a higher travel costs decrease the utility of a transport mode. 
-About ASC :  
+\end{description}
+
+\begin{description}
+    \item $\beta_{time} = -5.82$; the sign is negative, which aligns with behavioral expectations : an increase in travel time makes the alternative less attractive. 
+    \item $\beta_{cost} = -0.16$; which is also negative and  consistent : a higher travel costs decrease the utility of a transport mode. 
+\end{description}
+
+\begin{enumerate}
+About ASCs : 
 Walking was chosen as the reference alternative ($ASC_{walk} = 0$)  
 The estimated ASCs for other modes are all negative ($ASC_{pt} = -0.67$, $ASC_{car} = -1.44$ and 
-$ASC_{bike} = -4.01$) : if time and cost were exactly the same acres for all modes, walking would be the preferred mode on average. Estimation provides 5 parameters. The initial log-likelihood is -6,931.472, and the final log-likelihood is -4,547.355. This results in a $\rho^2$ (Rho-square) of 0.344, demonstrating an adequate level of explanatory power for an initial model. 
-% Model 1 
-\section{Model 1 : Alternative-Specific Parameters}
-\subsection{Model Specification}
+$ASC_{bike} = -4.01$) : if time and cost were exactly the same acres for all modes, walking would be the preferred mode on average. Estimation provides 5 parameters. The initial log-likelihood is -6,931.472, and the final log-likelihood is -4,547.355. This results in a $\rho^2$ (Rho-square) of 0.344, demonstrating an adequate level of explanatory power for an initial model.
+\end{enumerate}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\paragraph{Model 1 [3 points]} Using Model 0 as the base model, include alternative-specific parameters for one of the attributes of Model 0. Present both the specification and the estimation results (as defined previously). \textbf{[1~point]}\\
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 Using Model 0 as the base model, in this section, we introduce alternative specific parameters for travel time (with $\beta_{time\_walk}$, $\beta_{time\_cycle}$, $\beta_{time\_pt}$ and $\beta_{time\_car}$). The generic $\beta_{cost}$ is still the same.
 Utility functions are :  
 \begin{align*}
@@ -40,13 +92,32 @@ Utility functions are :
     V_{pt} &= ASC_{pt} + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time\_pt} \cdot dur\_pt\_total \\
     V_{car} &= ASC_{car} + \beta_{cost} \cdot cost\_car\_euro + \beta_{time\_car} \cdot dur\_driving
 \end{align*}
-\textbf{ Assumption:}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+\begin{enumerate}
+	\item State the underlying assumption of defining alternative-specific parameters in this specific situation. \textbf{[0.5~point]}
+\end{enumerate}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\paragraph{Assumption:}
+
 This assumes that travel time is felt differently for each mode. A minute of walking, driving, or bus taking is not valued the same way due to factors like comfort and physical effort.
-\subsection{Estimation Results}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{enumerate}[resume]
+	\item Comment on the estimation results (as defined previously, including any changes from the previous model). \textbf{[0.5~point]}
+\end{enumerate}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 The model estimates 8 parameters. The initial log-likelihood is -6931.472 and the final log-likelihood is -4221.215. 
 The estimation results show that all parameters ($\beta_{time\_walk}$, $\beta_{time\_bike}$, $\beta_{time\_pt}$, $\beta_{time\_car}$, $\beta_{cost}$ and ASCs) are  statistically significant with p-values equal to 0.0.  
-All estimated parameters for travel time and cost are negative. This indicates that longer travel times and higher prices make a transport mode less attractive to users. 
-\subsection{Model Comparison}
+All estimated parameters for travel time and cost are negative.% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{enumerate}[resume]
+	\item Compare Model 0 and Model 1 with an appropriate statistical test. Explain your choice of test. State the null hypothesis and the result of the test. Denote the preferred model as $\text{Model}_\text{pref}$. \textbf{[1~point]}
+\end{enumerate}
+
 To compare Model 0 and Model 1, we use a Likelihood Ratio (LR) test because Model 0 is a restricted version of Model 1, where $\beta_{time\_walk} = \beta_{time\_bike} = \beta_{time\_pt} = \beta_{time\_car}$
 \begin{description}
     \item \textbf{Null Hypothesis ($H_0$):} Model 0 is true model compared to Model 1.
@@ -58,51 +129,65 @@ $-2 \times (\mathcal{L}_{Model0} - \mathcal{L}_{Model1}) = -2 \times (-4547.355 
 Model 1 provides a statistically significant improvement in fit over Model 0. 
 Therefore, Model 1 becomes our preferred model, now written as $Model_{pref}$ for the next step.
 \end{description}
-% Model 2
-\section{Model 2 : Additional Attributes and Interactions}
-\subsection{Model Specification}
+
+\paragraph{Model 2 [4 points]} Using $\text{Model}_\text{pref}$ as the base model, include one additional alternative attribute and one interaction of a socioeconomic characteristic with either the ASCs or one of the attributes. Present both the specification and the estimation results (as defined previously). \textbf{[1~point]}\\
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 Using Model 1 ($Model_{pref}$) as the base model, we introduce two new elements: 
 \begin{itemize}
-    \item An alternative attribute: pt\_interchanges for public transport
-    \item An interaction of a socioeconomic characteristic: age with the ASCs
+    \item An alternative attribute: driving\_traffic\_percent for the car alternative.
+    \item An interaction of a socioeconomic characteristic: age with the ASCs of all non-reference modes.
 \end{itemize}
-Utility functions are :  
+
+Utility functions are:  
 \begin{align*}
     V_{walk} &= \beta_{time\_walk} \cdot dur\_walking \\
     V_{cycle} &= ASC_{cycle} + \beta_{age} \cdot age + \beta_{time\_bike} \cdot dur\_cycling \\
-    V_{pt} &= ASC_{pt} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time\_pt} \cdot dur\_pt\_total + \beta_{pt\_interchange} \cdot pt\_interchanges \\
-    V_{car} &= ASC_{car} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_car\_euro + \beta_{time\_car} \cdot dur\_driving
+    V_{pt} &= ASC_{pt} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time\_pt} \cdot dur\_pt\_total \\
+    V_{car} &= ASC_{car} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_car\_euro + \beta_{time\_car} \cdot dur\_driving + \beta_{traffic} \cdot driving\_traffic\_percent
 \end{align*}
+
+\begin{enumerate}
+	\item State the underlying assumptions of the additional attribute and interaction in this specific situation. \textbf{[1~point]}
+\end{enumerate}
+
 \begin{minipage}{\textwidth}
 \textbf{Assumption:}
 \begin{itemize}
-    \item \textbf{Public transport interchanges:} We assume that making a transfer between transit services imposes a  penalty that is independent of the travel time itself.
-    \item \textbf{Socioeconomic interaction (Age):} By interacting age with the ASCs, we assume that a person's age affects their baseline preference for non-walking modes. Mathematically, the baseline preference becomes individual-specific ($ASC_{pt\_total} = ASC_{pt} + \beta_{age} \cdot age$). This implies that older individuals might naturally prefer motorized modes over walking, regardless of the trip's cost or duration.
+    \item \textbf{Traffic variability:} We assume that higher traffic variability acts as an extra penalty for driving, increasing the uncertainty and stress of the trip.
+    \item \textbf{Socioeconomic interaction (Age):} By interacting age with the ASCs, we assume that a person's age structurally affects their baseline preference for non-walking modes. Mathematically, the baseline preference becomes individual-specific (e.g., $ASC_{pt\_total} = ASC_{pt} + \beta_{age} \cdot age$). This implies that older individuals might naturally prefer motorized modes over walking.
 \end{itemize}
 \end{minipage}
-\subsection{Estimation Results}
-The model estimates 10 parameters. The initial log-likelihood is -6931.472 and the final log-likelihood is -4211.725. 
-The estimation results show that time and cost parameters remain negative and statistically significant. 
+
+\begin{enumerate}[resume]
+	\item Comment on the estimation results (as defined previously). \textbf{[1~point]}
+\end{enumerate}
+
+The model estimates 10 parameters. The initial log-likelihood is -6931.472 and the final log-likelihood is -4127.624. 
+The estimation results show that time and cost parameters remain negative and highly statistically significant. 
 Regarding the new parameters:
 \begin{itemize}
-    \item The parameter $\beta_{age}$ is positive (0.0097) and significant (p-value = 0.000007). This validates our hypothesis that age positively influences the preference for non-walking modes. To illustrate with public transport, the baseline utility for a 20-year-old traveler is $-2.90 + (0.0097 \times 20) = -2.71$, which values to $-2.90 + (0.0097 \times 60) = -2.32$ for a 60-year-old individual. 
-    \item The parameter for public transport interchanges ($\beta_{pt\_interchange} = -0.059$) is \textbf{not statistically significant} , since its p-value is 0.518. 
-    This means that as long as the overall travel time is considered, having to change trains or busses does not significantly reduce the attractiveness of public transport for these travelers.
+    \item The parameter $\beta_{age}$ is positive (0.010) and significant (p-value = 0.000005). This validates our hypothesis that age positively influences the preference for non-walking modes. 
+    \item The parameter for traffic ($\beta_{traffic} = -2.87$) is negative and statistically significant (p-value = 0.0). This confirms that bad traffic conditions strongly discourage people from using a car.
 \end{itemize}
-\subsection{Model Comparison}
-To compare Model 1 and Model 2, we use a Likelihood Ratio (LR) test because Model 1 is a restricted version of Model 2, where $\beta_{pt\_interchange} = 0$ and $\beta_{age} = 0$.
+
+\begin{enumerate}[resume]
+	\item Compare $\text{Model}_\text{pref}$ and Model 2 with an appropriate statistical test. Explain your choice of test. State the null hypothesis and the result of the test. Denote the preferred model as $\text{Model}_\text{pref}$. \textbf{[1~point]}
+\end{enumerate}
+
+To compare Model 1 and Model 2, we use a Likelihood Ratio (LR) test because Model 1 is a restricted version of Model 2, where $\beta_{traffic} = 0$ and $\beta_{age} = 0$.
 \begin{description}
     \item \textbf{Null Hypothesis ($H_0$):} Model 1 is the true model compared to Model 2.
-    \item \textbf{Threshold:} 
-The critical $\chi^2$ value for 2 degrees of freedom (KU - KR = 10 - 8) at a 95\% confidence level is 5.99.
-    \item \textbf{Test Statistic:} 
-$-2 \times (\mathcal{L}_{Model1} - \mathcal{L}_{Model2}) = -2 \times (-4221.215 - (-4211.725) ) = 18.98$.
-\item \textbf{Result:} Since the test statistic (18.98) is strictly greater than the threshold (5.99), $H_0$ can be rejected at the 5.0\% level. 
+    \item \textbf{Threshold:} The critical $\chi^2$ value for 2 degrees of freedom (KU - KR = 10 - 8) at a 95\% confidence level is 5.99.
+    \item \textbf{Test Statistic:} $-2 \times (\mathcal{L}_{Model1} - \mathcal{L}_{Model2}) = -2 \times (-4221.215 - (-4127.624)) = 187.18$.
+    \item \textbf{Result:} Since the test statistic (187.18) is strictly greater than the threshold (5.99), $H_0$ can be rejected at the 5.0\% level. 
 We can now consider that Model 2 is our preferred model, $Model_{pref}$. 
 \end{description}
-%model 3
-\section{Model 3 : Non-Linear Transformation}
-\subsection{Model Specification}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\paragraph{Model 3 [3 points]} Using $\text{Model}_\text{pref}$ as the base model, include an appropriate non-linear transformation of one of the variables. Present both the specification and the estimation results (as defined previously). \textbf{[1~point]}\\
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 For this model, we apply an appropriate non-linear transformation by taking the logarithm of the travel time variables for all modes. Additionally, based on the non-significance of the interchange variable in Model 2, we replace it with a new attribute for the car alternative: traffic variability (driving\_traffic\_percent).
 Utility functions are:  
 \begin{align*}
@@ -111,6 +196,14 @@ Utility functions are:
     V_{pt} &= ASC_{pt} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time\_pt} \cdot \ln(dur\_pt\_total) \\
     V_{car} &= ASC_{car} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_car\_euro + \beta_{time\_car} \cdot \ln(dur\_driving) + \beta_{traffic} \cdot traffic\_percent
 \end{align*}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+\begin{enumerate}
+	\item State the underlying assumption of the non-linear specification defined in this situation. \textbf{[0.5~point]}
+\end{enumerate}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \begin{minipage}{\textwidth}
 \textbf{ Assumption:}
 \begin{itemize}
@@ -118,18 +211,34 @@ Utility functions are:
     \item \textbf{Traffic variability:} We assume that higher traffic variability is an extra penalty for driving, increasing the uncertainty and stress of the trip.
 \end{itemize}
 \end{minipage}
-\subsection{Estimation Results}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{enumerate}[resume]
+	\item Comment on the estimation results (as defined previously). \textbf{[0.5~point]}
+\end{enumerate}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 The model estimates 10 parameters. The initial log-likelihood is -6931.472 and the final log-likelihood reaches an impressive -4121.26. 
 The estimation results show that all 10 parameters are statistically significant (p-values are 0.0). 
 \begin{itemize}
     \item The time parameters are still negative. This means that even with the logarithm, longer trips make a transport mode less attractive.
     \item The new traffic parameter ($\beta_{traffic}$) is negative (-2.69). This proves our assumption that bad traffic conditions strongly discourage people from using a car.
 \end{itemize}
-\subsection{Model Comparison}
-Unlike previous steps, Model 2 and Model 3 are \textbf{non-nested models} because they contain different variables (interchanges vs. traffic percent) but have the same number of estimated parameters. Therefore, a standard Likelihood Ratio (LR) test cannot be used. Instead, we compare their goodness-of-fit using the Akaike Information Criterion (AIC) and the Bayesian Information Criterion (BIC).
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+\begin{enumerate}[resume]
+	\item Compare $\text{Model}_\text{pref}$ and Model 3 with an appropriate statistical test. Explain your choice of test. State the null hypothesis and the result of the test. Denote the preferred model as $\text{Model}_\text{pref}$. \textbf{[1~point]}
+\end{enumerate}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+To compare the purely linear travel time model (Model 2) against the logarithmic travel time model (Model 3), we cannot use a standard Likelihood Ratio test because they are non-nested models. Instead, we use a Box-Cox transformation approach to conduct a statistical test on the functional form. By estimating a Box-Cox parameter $\hat{\lambda}$ for travel time, we can evaluate which model the data favors.
 \begin{description}
-    \item \textbf{Model 2 Indicators:} $AIC = 8443.45$ and $BIC = 8508.62$
-    \item \textbf{Model 3 Indicators:} $AIC = 8262.52$ and $BIC = 8327.69$
-   \item \textbf{Result:} We choose Model 3 because its AIC and BIC scores are lower than Model 2. A lower score means the model makes better predictions without being too complicated. The Final Log-Likelihood also shows a big improvement (going from -4211.72 to -4121.26). As a result, Model 3 becomes our definitive preferred model ($Model_{pref}$).
+    \item \textbf{Null Hypotheses ($H_0$):} 
+    $H_{0,A}$: Model 2 is the true model ($\lambda = 1$)
+    $H_{0,B}$: Model 3 is the true model ($\lambda = 0$)
+    \item \textbf{Test Statistic \& Result:} We calculate the absolute t-statistics for both constraints ($t_{\lambda=1}$ and $t_{\lambda=0}$) to determine which fixed parameter value the estimated $\hat{\lambda}$ is closer to. 
+    
+    The results indicate that Model 3 is the better model because $\hat{\lambda}$ is closer to 0, resulting in a smaller absolute t-statistic ($|t|$) for $H_{0,B}$ compared to the t-statistic for $H_{0,A}$. Therefore, the logarithmic specification (Model 3) is a better fit than the linear specification (Model 2), making Model 3 our definitive preferred model ($Model_{pref}$).
 \end{description}
-\end{document}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
