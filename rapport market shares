@@ -112,19 +112,19 @@ To obtain the confidence intervals, we re-estimate $\text{Model}_\text{pref}$ wi
 	\begin{tabular}{l|cc}
 		Mode & Predicted market share & 90\% confidence interval \\
 		\hline
-		Walking          & 18.7\% & [17.5\% ; 19.8\%] \\
-		Cycling          & 2.8\%  & [2.3\% ; 3.3\%] \\
-		Public transport & 35.7\% & [33.9\% ; 37.6\%] \\
-		Car              & 42.8\% & [40.7\% ; 44.9\%] \\
+		Walking          & 18.8\% & [17.6\% ; 19.9\%] \\
+		Cycling          & 2.9\%  & [2.4\% ; 3.5\%] \\
+		Public transport & 35.1\% & [33.4\% ; 36.8\%] \\
+		Car              & 43.2\% & [41.2\% ; 45.4\%] \\
 	\end{tabular}
 	\captionof{table}{Weighted market shares predicted by $\text{Model}_\text{pref}$\label{tab:ms}}
 \end{table}
 
 The results match our expectations:
 \begin{itemize}
-	\item \textbf{Car} is the most chosen mode (42.8\%), followed by \textbf{public transport} (35.7\%). This is consistent with the London metropolitan area, which has a very dense public transport network, but where a large part of the trips are made in the outer areas where the car stays very competitive.
-	\item \textbf{Walking} has a significant share (18.7\%). It is the preferred mode for short trips, which is consistent with the strong negative effect of the logarithm of walking time ($\beta_{time\_walk} = -4.19$): walking is very attractive for short trips but quickly loses its utility when the trip gets longer.
-	\item \textbf{Cycling} has a very low share (2.8\%), which is consistent with the very negative $ASC_{cycle}$ ($-2.58$) and with the known low cycling share in London.
+	\item \textbf{Car} is the most chosen mode (43.2\%), followed by \textbf{public transport} (35.1\%). This is consistent with the London metropolitan area, which has a very dense public transport network, but where a large part of the trips are made in the outer areas where the car stays very competitive.
+	\item \textbf{Walking} has a significant share (18.8\%). It is the preferred mode for short trips, which is consistent with the strong negative effect of the logarithm of walking time ($\beta_{time\_walk} = -4.19$): walking is very attractive for short trips but quickly loses its utility when the trip gets longer.
+	\item \textbf{Cycling} has a very low share (2.9\%), which is consistent with the very negative $ASC_{cycle}$ ($-2.58$) and with the known low cycling share in London.
 \end{itemize}
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \par}\medskip
@@ -141,26 +141,181 @@ W_{obs}(i) = \frac{1}{S} \sum_{n=1}^{S} \omega_{g(n)} \cdot y_{in}
 \qquad \text{with } y_{in} = 1 \text{ if individual } n \text{ chose } i, \text{ and } 0 \text{ otherwise.}
 \]
 
-
-
 \begin{table}[h]
 	\centering
 	\begin{tabular}{l|ccc}
 		Mode & Predicted ($\text{Model}_\text{pref}$) & 90\% CI & Actual (weighted) \\
 		\hline
-		Walking          & 18.7\% & [17.5\% ; 19.8\%] & 18.9\% \\
-		Cycling          & 2.8\%  & [2.3\% ; 3.3\%]   & 3\% \\
-		Public transport & 35.7\% & [33.9\% ; 37.6\%] & 35.7\% \\
-		Car              & 42.8\% & [40.7\% ; 44.9\%] & 42.5\% \\
+		Walking          & 18.8\% & [17.6\% ; 19.9\%] & 18.9\% \\
+		Cycling          & 2.9\%  & [2.4\% ; 3.5\%]   & 3.0\% \\
+		Public transport & 35.1\% & [33.4\% ; 36.8\%] & 35.7\% \\
+		Car              & 43.2\% & [41.2\% ; 45.4\%] & 42.5\% \\
 	\end{tabular}
 	\captionof{table}{Predicted versus actual weighted market shares\label{tab:actual}}
-{\itshape\raggedright
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-The values of our actual choices are close to the values predicted by our model ($\text{Model}_\text{pref}$), and for each mode, the actual values lie within the confidence interval. We can therefore validate our predicted model ($\text{Model}_\text{pref}$) as a good model.\par
-}
 \end{table}
 
+The values of our actual choices are close to the values predicted by our model ($\text{Model}_\text{pref}$): the differences are at most 0.7 percentage point. The model slightly overestimates the car share (43.2\% vs. 42.5\%) and slightly underestimates the public transport share (35.1\% vs. 35.7\%), while walking and cycling are almost exactly reproduced. For each mode, the actual value lies within the 90\% confidence interval. We can therefore validate $\text{Model}_\text{pref}$ as a good model to predict the market shares.
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
 
+\paragraph{Forecasting [6 points]} Consider the following scenarios: (i) an increase of car cost by 15\%; and (ii) a decrease of public transport cost by 15\%.
+
+\begin{enumerate}
+	\item Report the market shares predicted by $\text{Model}_\text{pref}$ for each scenario. Do they match your expectations? Compare the predicted market shares with the original market shares. \textbf{[1~point]}
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+Each scenario is simulated with $\text{Model}_\text{pref}$ by multiplying the cost variable in the corresponding utility function: $1.15 \cdot \beta_{cost} \cdot cost_{car}$ in $V_{car}$ for scenario (i), and $0.85 \cdot \beta_{cost} \cdot cost_{pt}$ in $V_{pt}$ for scenario (ii). All other utilities are unchanged. The market shares are the weighted means of the individual probabilities (same strata weights as before), and the 90\% confidence intervals come from the same 100 bootstrap draws.
+
+\begin{table}[h]
+	\centering
+	\small
+	\begin{tabular}{l|c|cc|cc}
+		Mode & Base & (i) Car +15\% & 90\% CI & (ii) PT $-15$\% & 90\% CI \\
+		\hline
+		Walking          & 18.8\% & 18.8\% & [17.6\% ; 20.0\%] & 18.7\% & [17.5\% ; 19.9\%] \\
+		Cycling          & 2.9\%  & 2.9\%  & [2.4\% ; 3.5\%]   & 2.8\%  & [2.3\% ; 3.4\%] \\
+		Public transport & 35.1\% & 35.5\% & [33.9\% ; 37.4\%] & 35.7\% & [34.1\% ; 37.5\%] \\
+		Car              & 43.2\% & 42.8\% & [40.7\% ; 44.6\%] & 42.8\% & [40.7\% ; 44.6\%] \\
+	\end{tabular}
+	\captionof{table}{Weighted market shares predicted by $\text{Model}_\text{pref}$ for each scenario\label{tab:scenarios}}
+\end{table}
+
+The results match our expectations in terms of direction:
+\begin{itemize}
+	\item In scenario (i), the car becomes more expensive, so its share decreases (43.2\% $\rightarrow$ 42.8\%), and the lost users mainly shift to public transport (35.1\% $\rightarrow$ 35.5\%). Walking and cycling are almost unchanged, as they do not depend on cost.
+	\item In scenario (ii), public transport becomes cheaper, so its share increases (35.1\% $\rightarrow$ 35.7\%). This gain comes from the car (43.2\% $\rightarrow$ 42.8\%) but also slightly from walking and cycling ($-0.1$ point each).
+\end{itemize}
+However, the changes are small (less than 1 percentage point) and the base shares are inside the 90\% confidence intervals of both scenarios. Our model is therefore very stable: a 15\% change in cost has only a limited impact on mode choice, because travel time (in logarithm), age and the traffic variability weigh much more in the utilities than cost ($\beta_{cost} = -0.123$).
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
+
+\begin{enumerate}[resume]
+	\item  Which scenario is the most effective policy if the goal is to decrease the share of car? Explain why. \textbf{[0.5~point]} 
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+Both scenarios decrease the car share by almost the same amount: 43.22\% $\rightarrow$ 42.78\% ($-0.44$ point) in scenario (i) and 43.22\% $\rightarrow$ 42.76\% ($-0.46$ point) in scenario (ii). Scenario (ii) is therefore very slightly more effective, but the difference (0.02 point) is negligible compared with the confidence intervals, so the two policies can be considered equivalent for this goal.
+The two policies differ however in their side effects. Scenario (ii) also attracts walkers and cyclists to public transport, and it strongly reduces the public transport revenue (question 3). Scenario (i) reduces the car share as much while increasing the public transport revenue. If the goal is only to decrease the car share, both are equivalent; if the cost of the policy is taken into account, scenario (i) is the most efficient.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{q2 forecasting .png}
+	\label{fig:1}
+\end{figure}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
+
+\begin{enumerate}[resume]
+	\item Calculate the total public transportation revenue in each scenario. Which scenario reports the highest total revenue? Explain why. Is it higher than the total revenue obtained without any of the policies? Can you explain why? \textbf{[1.5~points]} 
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+For each scenario, the revenue per person is the weighted average, over the sample, of the probability of choosing public transport multiplied by the public transport fare paid in the scenario (in euros, $\times 0.85$ in scenario (ii)). The total revenue is then obtained by scaling it to the whole London population ($N = 8'673'713$):
+\[
+R = N \cdot \frac{\sum_{n=1}^{S} \omega_{g(n)} \cdot P_n(pt) \cdot cost_{pt,n}}{\sum_{n=1}^{S} \omega_{g(n)}}
+\]
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|ccc}
+		Scenario & Revenue per person (EUR) & Total revenue (EUR) & Change vs. base \\
+		\hline
+		Base (no policy)       & 0.81 & 7'063'759.87 & -- \\
+		(i) Car cost +15\%     & 0.83 & 7'168'796.90 & +1.49\% \\
+		(ii) PT cost $-15$\%   & 0.71 & 6'157'488.22 & $-12.83$\% \\
+	\end{tabular}
+	\captionof{table}{Total public transport revenue in each scenario\label{tab:revenue}}
+\end{table}
+
+\begin{itemize}
+	\item \textbf{Scenario 1 (car cost +15\%) gives the highest public transport revenue.} Fares are unchanged, and the PT share rises from about 35.1\% to 35.5\%, roughly +1\%. Revenue therefore rises by about 1\% over the base.
+	\item \textbf{Scenario 2 (PT cost -15\%) gives lower revenue than the base.} Fares fall by 15\%, and the PT share rises only about 1.7\% (35.1\% to 35.7\%). Revenue falls by about 13\%.
+	\item \textbf{So scenario 1 is higher than the no-policy revenue, and scenario 2 is lower.} The reason is that demand for public transport is inelastic with respect to its own price (see question 5, where the own elasticity is about -0.1). When the fare falls, the lost revenue per trip outweighs the extra trips. When the car gets more expensive, extra people switch to PT at the same fare, which adds revenue with no price cut.
+\end{itemize}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
+
+\begin{enumerate}[resume]
+	\item Calculate the average value of time for car and public transportation. Comment on the obtained results. \textbf{[1~point]}
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+The value of time is the ratio between the derivative of the utility with respect to time and its derivative with respect to cost. As travel times enter $\text{Model}_\text{pref}$ in logarithm, the VOT is not constant but depends on the travel time of each individual:
+\[
+VOT_{n,i} = \frac{\partial V_i / \partial t_{in}}{\partial V_i / \partial c_{in}} = \frac{\beta_{time,i}}{\beta_{cost} \cdot t_{in}}
+\]
+It is simulated for each individual and then averaged with the strata weights.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|cccccc}
+		Mode & Weighted mean & Mean (unweighted) & Median & 25\% & 75\% & Max \\
+		\hline
+		Car              & 91.6 & 92.3 & 65.3 & 34.6 & 118.3 & 1'189.5 \\
+		Public transport & 49.0 & 49.3 & 35.0 & 21.1 & 61.5  & 1'820.3 \\
+	\end{tabular}
+	\captionof{table}{Value of time (EUR/h) for car and public transport\label{tab:vot}}
+\end{table}
+
+The average VOT is 91.6 EUR/h for car and 49.0 EUR/h for public transport: car users value their travel time almost twice as much as public transport users. A possible explanation is that time spent in public transport can be used for other activities (reading, working), whereas driving is more stressful and tiring. The weighting has only a small effect (92.3 $\rightarrow$ 91.6 and 49.3 $\rightarrow$ 49.0).
+
+These averages are high because of the logarithmic specification: the VOT is inversely proportional to the travel time, so it becomes very large for very short trips. The distributions are therefore very skewed (maximum of 1'189.5 EUR/h for car and 1'820.3 EUR/h for public transport), and the mean is much higher than the median (65.3 and 35.0 EUR/h). The median is a more representative value of the VOT of a typical traveller.
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
+
+\begin{enumerate}[resume]
+	\item Compute the direct and cross aggregate elasticities of car cost and public transport cost. Comment on the obtained results. Report the normalization factors. \textbf{[2~points]}
+\end{enumerate}
+
+{\itshape
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+For a logit model, the individual point elasticities of $P_n(i)$ with respect to the cost $c$ are:
+\[
+E^{P_n(i)}_{c_{in}} = \beta_{cost} \cdot c_{in} \cdot \left(1 - P_n(i)\right) \qquad \text{(direct)}, \qquad
+E^{P_n(i)}_{c_{jn}} = -\beta_{cost} \cdot c_{jn} \cdot P_n(j) \qquad 
+\]
+The aggregate elasticity is the weighted sum of the individual elasticities, divided by the weighted number of people choosing mode $i$ (normalization factor):
+\[
+E^{W(i)}_{c} = \frac{\sum_{n=1}^{S} \omega_{g(n)} \, P_n(i) \, E^{P_n(i)}_{c}}{\sum_{n=1}^{S} \omega_{g(n)} \, P_n(i)}
+\]
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|l|c|c}
+		Share of & With respect to & Type & Aggregate elasticity \\
+		\hline
+		Car              & Car cost & direct & $-0.071$ \\
+		Car              & PT cost  & cross  & $+0.071$ \\
+		Public transport & PT cost  & direct & $-0.108$ \\
+		Public transport & Car cost & cross  & $+0.075$ \\
+	\end{tabular}
+	\captionof{table}{Aggregate direct and cross elasticities with respect to cost\label{tab:elast}}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|c}
+		Normalization factor & Value \\
+		\hline
+		Sum of the weights (sample size), $\sum_n \omega_{g(n)}$ & 5'000.0 \\
+		Weighted number choosing car, $\sum_n \omega_{g(n)} P_n(car)$ & 2'161.0 \\
+		Weighted number choosing PT, $\sum_n \omega_{g(n)} P_n(pt)$ & 1'757.4 \\
+	\end{tabular}
+	\captionof{table}{Normalization factors\label{tab:norm}}
+\end{table}
+
+\begin{itemize}
+	\item Direct car elasticity is about -0.06, cross elasticity of car share with respect to PT cost about +0.06, direct PT elasticity about -0.11, and cross PT elasticity with respect to car cost about +0.08.
+	\item All four are below 1 in absolute value, so demand for both modes is inelastic. Public transport is more responsive to its own cost than car demand is, but the effect is still small.
+	\item The cross elasticities are positive, which confirms that car and PT are substitutes: a higher cost for one mode pushes some people to the other. The effects are modest because the cost coefficient is small (about -0.12 per euro), so cost changes move choices only slightly.
+	\item The normalisation factors are the sum of the weights (5,000), and the weighted numbers choosing car and PT, sum(w * P). Each aggregate elasticity divides the weighted sum of individual elasticities by the weighted number of people choosing that mode.
+\end{itemize}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\par}\medskip
 
 
 \end{document}
