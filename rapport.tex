@@ -76,7 +76,7 @@ All five estimated parameters have a p-value of 0.0. This means that the Alterna
 About ASCs : 
 Walking was chosen as the reference alternative ($ASC_{walk} = 0$)  
 The estimated ASCs for other modes are all negative ($ASC_{pt} = -0.67$, $ASC_{car} = -1.44$ and 
-$ASC_{bike} = -4.01$) : if time and cost were exactly the same acres for all modes, walking would be the preferred mode on average. Estimation provides 5 parameters. The initial log-likelihood is -6,931.472, and the final log-likelihood is -4,547.355. This results in a $\rho^2$ (Rho-square) of 0.344, demonstrating an adequate level of explanatory power for an initial model.
+$ASC_{bike} = -4.01$) : if time and cost were exactly the same accross for all modes, walking would be the preferred mode on average. Estimation provides 5 parameters. The initial log-likelihood is -6,931.472, and the final log-likelihood is -4,547.355. This results in a $\rho^2$ (Rho-square) of 0.344, demonstrating an adequate level of explanatory power for an initial model.
 \end{enumerate}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -186,16 +186,17 @@ We can now consider that Model 2 is our preferred model, $Model_{pref}$.
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 \paragraph{Model 3 [3 points]} Using $\text{Model}_\text{pref}$ as the base model, include an appropriate non-linear transformation of one of the variables. Present both the specification and the estimation results (as defined previously). \textbf{[1~point]}\\
-
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-For this model, we apply an appropriate non-linear transformation by taking the logarithm of the travel time variables for all modes. Additionally, based on the non-significance of the interchange variable in Model 2, we replace it with a new attribute for the car alternative: traffic variability (driving\_traffic\_percent).
-Utility functions are:  
+
+For this model, we use Model 2 as the base model and apply a non-linear transformation: we take the logarithm of the travel time variables of all modes. All the other variables (cost, age interaction and traffic attribute) are unchanged, so that Model 3 has the same number of parameters as Model 2.
+Utility functions are:
 \begin{align*}
     V_{walk} &= \beta_{time\_walk} \cdot \ln(dur\_walking) \\
-    V_{cycle} &= ASC_{cycle} + \beta_{age} \cdot age + \beta_{time\_bike} \cdot \ln(dur\_cycling) \\
+    V_{cycle} &= ASC_{cycle} + \beta_{age} \cdot age + \beta_{time\_cycle} \cdot \ln(dur\_cycling) \\
     V_{pt} &= ASC_{pt} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_pt\_euro + \beta_{time\_pt} \cdot \ln(dur\_pt\_total) \\
-    V_{car} &= ASC_{car} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_car\_euro + \beta_{time\_car} \cdot \ln(dur\_driving) + \beta_{traffic} \cdot traffic\_percent
+    V_{car} &= ASC_{car} + \beta_{age} \cdot age + \beta_{cost} \cdot cost\_car\_euro + \beta_{time\_car} \cdot \ln(dur\_driving) + \beta_{traffic} \cdot driving\_traffic\_percent
 \end{align*}
+ 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 
